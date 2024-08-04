@@ -14,7 +14,7 @@ const BrandCard = ({ image }: Props) => {
         alt="CardBorder"
         className="relative top-0 left-0"
       />
-      <Image src={image} alt="Brands" className="absolute w-4/5 md:w-1/2" />
+      <Image width={100} height={100} src={image} alt="Brands" className="absolute w-4/5 md:w-1/2" />
     </div>
   );
 };
