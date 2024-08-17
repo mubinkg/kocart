@@ -12,6 +12,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import HighlightCard from "@/components/HighlightCard";
 import { bestSelling, hotDeals, ourProducts } from "@/constants/products";
 import BrandSenction from "@/components/home/BrandSenction";
+import Product from "@/components/Product";
 
 export default function Component() {
   return (
@@ -71,11 +72,7 @@ export default function Component() {
             View all
           </Button>
         </div>
-        <div className="grid grid-cols-2 gap-x-3 lg:gap-x-5 gap-y-5 lg:gap-y-10 mt-4 sm:grid-cols-2 lg:grid-cols-4">
-          {ourProducts.map((product, index) => (
-            <ProductCard key={index} product={product} />
-          ))}
-        </div>
+        <Product/>
       </section>
     </div>
   );

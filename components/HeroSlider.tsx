@@ -56,6 +56,12 @@ const HeroSlider = (props: Props) => {
     });
   }, [api]);
 
+  useEffect(() => {
+    fetch("http://3.91.116.119:8000/api/courses")
+      .then((res) => res.json())
+      .then((data) =>console.log(data))
+  }, []);
+
   return (
     <div className="md:w-full px-5 md:px-10 py-5">
       <Carousel

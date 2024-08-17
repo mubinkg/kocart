@@ -5,33 +5,22 @@ import Image, { StaticImageData } from "next/image";
 import { useRouter } from "next/navigation";
 
 type CardProps = {
-  product: {
-    productName: string;
-    regularPrice: number;
-    discountPrice?: number;
-    discount?: number;
-    image: StaticImageData;
-    rating: {
-      total: number;
-      average: number;
-    };
-    timeLeft?: {
-      days: number;
-      hours: number;
-      minutes: number;
-    };
-  };
+  product: any,
+  variant?: any
 };
 
-const ProductCard = ({ product }: CardProps) => {
+const ProductCard = ({ product , variant}: CardProps) => {
+  console.log(variant)
   const router = useRouter()
   return (
     <div className="cursor-pointer rounded-lg overflow-hidden border border-gray-300" onClick={()=>router.push('/product')}>
       <div className="relative flex items-center justify-center h-48 bg-backgroundc px-5 py-4">
         <Image
-          src={product.image}
+          src={product?.pro_input_image}
           alt="Oversized Jeans Jacket"
           className="object-cover"
+          width={200}
+          height={150}
         />
         {product.discount && (
           <span className="absolute top-4 left-3 bg-secoundaryc text-white text-xs px-2 py-1 rounded">
@@ -63,27 +52,27 @@ const ProductCard = ({ product }: CardProps) => {
         )}
         <div className="flex flex-col justify-between pt-2 md:pt-3">
           <h2 className="text-sm md:text-lg font-semibold mb-2 px-3">
-            {product.productName}
+            {product?.pro_input_name}
           </h2>
 
           <div className="flex items-center mb-2 px-3">
-            {product.discountPrice ? (
+            {variant?.specialPrice ? (
               <>
                 <span className="text-sm md:text-xl font-bold text-secoundaryc mr-2">
-                  ${product.discountPrice}
+                  ${variant?.price - variant?.specialPrice}
                 </span>
                 <span className="text-xs md:text-sm text-gray-500 line-through font-semibold">
-                  ${product.regularPrice}
+                  ${variant?.specialPrice}
                 </span>
               </>
             ) : (
               <span className="text-sm md:text-xl font-bold text-secoundaryc">
-                ${product.regularPrice}
+                ${variant?.specialPrice}
               </span>
             )}
           </div>
 
-          <div className="flex items-center px-3 pb-5">
+          {/* <div className="flex items-center px-3 pb-5">
             {[...Array(product.rating.average)].map((_, i) => (
               <svg
                 key={i}
@@ -96,7 +85,7 @@ const ProductCard = ({ product }: CardProps) => {
             <span className="text-sm text-gray-500 font-medium ml-2">
               ({product.rating.total})
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
