@@ -72,8 +72,8 @@ const ProductCard = ({ product , variant}: CardProps) => {
             )}
           </div>
 
-          {/* <div className="flex items-center px-3 pb-5">
-            {[...Array(product.rating.average)].map((_, i) => (
+          <div className="flex items-center px-3 pb-5">
+            {[...Array(5)].map((_, i) => (
               <svg
                 key={i}
                 className="w-4 h-4 text-[#FFAD33] fill-current"
@@ -83,9 +83,9 @@ const ProductCard = ({ product , variant}: CardProps) => {
               </svg>
             ))}
             <span className="text-sm text-gray-500 font-medium ml-2">
-              ({product.rating.total})
+              ({5})
             </span>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
