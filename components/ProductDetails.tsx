@@ -4,45 +4,33 @@ import { Download, Star } from "lucide-react";
 import { Checkbox } from "@radix-ui/react-checkbox";
 import { Button } from "./ui/button";
 
-type Props = {
-  product: {
-    name: string;
-    price: number;
-    description: string;
-    sizes: string[];
-    colors: string[];
-    rating: {
-      stars: number;
-      reviews: number;
-    };
-  };
-};
 
-const ProductDetails = ({ product }: Props) => {
+
+const ProductDetails = ({ product }: any) => {
   return (
     <div className="md:pr-10 py-5">
       <div className="flex justify-between">
-        <h2 className="text-2xl font-semibold font-sans">{product.name}</h2>
+        <h2 className="text-2xl font-semibold font-sans">{product?.pro_input_name}</h2>
         <Badge className="rounded-md px-1 md:px-3 py-2 bg-[#11D600] bg-opacity-20 text-[#11D600] border border-[#11D600] hover:bg-">
           In Stock
         </Badge>
       </div>
       <div className="flex gap-1">
-        {[...Array(Math.round(product.rating.stars))].map((_, i) => (
+        {[...Array(Math.round(5))].map((_, i) => (
           <Star key={i} size={20} className="text-[#FFAD33]" fill="#FFAD33" />
         ))}
         <p className="text-gray-400 font-sans">
-          ({product.rating.reviews} Reviews)
+          ({5} Reviews)
         </p>
       </div>
       <div className="py-2">
-        <p className="text-xl font-bold">${product.price}</p>
+        <p className="text-xl font-bold">${product?.productvariants[0]?.price}</p>
       </div>
       <div className="py-3">
-        <p className="font-sans">{product.description}</p>
+        <p className="font-sans">{product?.pro_input_description}</p>
       </div>
       <hr></hr>
-      <div className="py-2 flex flex-col gap-1">
+      {/* <div className="py-2 flex flex-col gap-1">
         <label className="font-medium">Colours: </label>
         <div className="flex gap-1">
           {product.colors.map((color, i) => (
@@ -62,7 +50,7 @@ const ProductDetails = ({ product }: Props) => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
       <Button className="gap-2 px-7 py-6 bg-[#41469B] mt-3 font-sans">
         Get the App to Buy this item <Download size={18} />{" "}
       </Button>
