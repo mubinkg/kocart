@@ -10,10 +10,9 @@ type CardProps = {
 };
 
 const ProductCard = ({ product , variant}: CardProps) => {
-  console.log(variant)
   const router = useRouter()
   return (
-    <div className="cursor-pointer rounded-lg overflow-hidden border border-gray-300" onClick={()=>router.push('/product')}>
+    <div className="cursor-pointer rounded-lg overflow-hidden border border-gray-300" onClick={()=>router.push(`/product/${product?._id}`)}>
       <div className="relative flex items-center justify-center h-48 bg-backgroundc px-5 py-4">
         <Image
           src={product?.pro_input_image}

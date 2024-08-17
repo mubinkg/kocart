@@ -13,8 +13,8 @@ const Product = () => {
           "offset": 0
         }
       }, fetchPolicy: "no-cache"})
-    console.log(data)
-    return (
+
+      return (
         <div className="grid grid-cols-2 gap-x-3 lg:gap-x-5 gap-y-5 lg:gap-y-10 mt-4 sm:grid-cols-2 lg:grid-cols-4">
             {data?.getProductForWeb?.map((product:any, index:number) => (
                 <ProductCard key={index} product={product} variant={product?.productvariants[0]}/>
