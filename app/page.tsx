@@ -13,37 +13,13 @@ import HighlightCard from "@/components/HighlightCard";
 import { bestSelling, hotDeals, ourProducts } from "@/constants/products";
 import BrandSenction from "@/components/home/BrandSenction";
 import Product from "@/components/Product";
+import HotDeals from "@/components/hot-deals/HotDeals";
 
 export default function Component() {
   return (
     <div className="min-h-screen">
       <HeroSlider />
-      <section className="px-1 md:px-10 md:py-8 mt-10">
-        <HighlightCard text="Today's" />
-        <Carousel className="w-full md:px-5 py-1">
-          <div className="flex justify-between gap-0 w-full py-10 px-4">
-            <h2 className="text-xl md:text-3xl font-semibold">Hot Deals 🔥</h2>
-            <div className="flex gap-10">
-              <CarouselPrevious className="relative md:w-14 md:h-14 bg-gray-100 left-0">
-                <ArrowLeft className="h-3 w-3 md:h-5 md:w-5" />
-              </CarouselPrevious>
-              <CarouselNext className="relative md:w-14 md:h-14 bg-gray-100 right-0">
-                <ArrowRight className="h-3 w-3 md:h-5 md:w-5" />
-              </CarouselNext>
-            </div>
-          </div>
-          <CarouselContent className="ml-0 py-1">
-            {hotDeals.map((product, index) => (
-              <CarouselItem
-                key={index}
-                className="basis-1/2 sm:basis-1/3 lg:basis-1/4"
-              >
-                <ProductCard product={product} />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
-      </section>
+      <HotDeals/>
       <BrandSenction/>
       <section className="px-5 md:px-10 py-8 mt-10">
         <HighlightCard text="This month" />

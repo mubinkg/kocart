@@ -6,10 +6,13 @@ import { useRouter } from "next/navigation";
 
 type CardProps = {
   product: any,
-  variant?: any
+  variant?: any,
+  days: any,
+  hours: any,
+  minutes: any
 };
 
-const ProductCard = ({ product , variant}: CardProps) => {
+const ProductCard = ({ product , variant, days, hours, minutes}: CardProps) => {
   const router = useRouter()
   return (
     <div className="cursor-pointer rounded-lg overflow-hidden border border-gray-300" onClick={()=>router.push(`/product/${product?._id}`)}>
@@ -21,7 +24,7 @@ const ProductCard = ({ product , variant}: CardProps) => {
           width={200}
           height={150}
         />
-        {product.discount && (
+        {product?.discount && (
           <span className="absolute top-4 left-3 bg-secoundaryc text-white text-xs px-2 py-1 rounded">
             -{product.discount}%
           </span>
@@ -29,10 +32,10 @@ const ProductCard = ({ product , variant}: CardProps) => {
       </div>
 
       <div className="">
-        {product.timeLeft && (
+        {days && (
           <div
             className={`flex flex-col justify-center items-center text-white text-sm font-medium py-2 px-4 mb-4 ${
-              product.timeLeft.days ? "bg-[#6469BE]" : "bg-secoundaryc"
+              days ? "bg-[#6469BE]" : "bg-secoundaryc"
             }`}
           >
             <div className="text-center flex gap-6 text-[10px] font-light">
@@ -41,11 +44,11 @@ const ProductCard = ({ product , variant}: CardProps) => {
               <div className="">Minutes</div>
             </div>
             <div className="text-center flex gap-4 text-base font-bold">
-              <div className="">{product.timeLeft.days}</div>
+              <div className="">{days}</div>
               <p>:</p>
-              <div className="">{product.timeLeft.hours}</div>
+              <div className="">{hours}</div>
               <p>:</p>
-              <div className="">{product.timeLeft.minutes}</div>
+              <div className="">{minutes}</div>
             </div>
           </div>
         )}
