@@ -7,9 +7,9 @@ import { useRouter } from "next/navigation";
 type CardProps = {
   product: any,
   variant?: any,
-  days: any,
-  hours: any,
-  minutes: any
+  days?: any,
+  hours?: any,
+  minutes?: any
 };
 
 const ProductCard = ({ product , variant, days, hours, minutes}: CardProps) => {
