@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 export const client = new ApolloClient({
-    uri: 'http://localhost:3001/graphql',
+    uri: 'http://kocart.com/api/graphql',
     cache: new InMemoryCache(),
 });
