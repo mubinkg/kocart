@@ -8,23 +8,23 @@ import navbarItems from "@/constants/navbar";
 import {
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import MenuModal from "./MenuModal";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
 const NavBar = (props: Props) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const router = useRouter()
 
   return (
     <header className="flex items-center justify-between px-5 lg:px-10 py-4 bg-white shadow-md">
-      <div className="w-14 sm:w-20 lg:w-24 hover:cursor-pointer">
+      <div onClick={()=>router.push('/')} className="w-14 sm:w-20 lg:w-24 hover:cursor-pointer">
         <Image alt="KoCart Logo" src={logo} />
       </div>
       <NavigationMenu className="hidden lg:block pl-14">
@@ -38,13 +38,13 @@ const NavBar = (props: Props) => {
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="flex flex-col px-3 py-2 ">
                     {item.subItems.map((subItem, key) => (
-                      <NavigationMenuLink
+                      <Link
                         key={key}
                         href={subItem.url}
                         className="py-1 px-6 rounded-sm hover:text-white hover:bg-primaryc"
                       >
                         {subItem.text}
-                      </NavigationMenuLink>
+                      </Link>
                     ))}
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -52,12 +52,12 @@ const NavBar = (props: Props) => {
             } else {
               return (
                 <NavigationMenuItem key={key}>
-                  <NavigationMenuLink
+                  <Link
                     href={item.url}
                     className="px-1 hover:text-secoundaryc"
                   >
                     {item.text}
-                  </NavigationMenuLink>
+                  </Link>
                 </NavigationMenuItem>
               );
             }

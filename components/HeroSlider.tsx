@@ -9,10 +9,6 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import Image from "next/image";
-import heroImg from "@/assets/hero_slide.png";
-import { Autour_One } from "next/font/google";
-import { Button } from "./ui/button";
 import ProgressCount from "./ProgressCount";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useGetSliders } from "@/hooks/slider/useGetSlider";
@@ -55,12 +51,6 @@ const HeroSlider = (props: Props) => {
       setCurrent(api.selectedScrollSnap() + 1);
     });
   }, [api]);
-
-  useEffect(() => {
-    fetch("http://3.91.116.119:8000/api/courses")
-      .then((res) => res.json())
-      .then((data) =>console.log(data))
-  }, []);
 
   return (
     <div className="md:w-full px-5 md:px-10 py-5">
