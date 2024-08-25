@@ -15,12 +15,21 @@ import {
 import MenuModal from "./MenuModal";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useQuery } from "@apollo/client";
+import { PRODUCT_CATEGORY } from "@/graphql/query/category";
 
 type Props = {};
 
 const NavBar = (props: Props) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const router = useRouter()
+  const {data, loading} = useQuery(PRODUCT_CATEGORY, {variables:{
+    "getCategoriesInput": {
+      "limit": 100,
+      "offset": 0
+    }
+  }})
+
 
   return (
     <header className="flex items-center justify-between px-5 lg:px-10 py-4 bg-white shadow-md">
@@ -29,21 +38,21 @@ const NavBar = (props: Props) => {
       </div>
       <NavigationMenu className="hidden lg:block pl-14">
         <NavigationMenuList className="flex gap-1">
-          {navbarItems.map((item, key) => {
-            if (item.subItems.length > 0) {
+          {data?.categories?.map((item, key) => {
+            if (item?.children?.length > 0) {
               return (
                 <NavigationMenuItem key={key}>
                   <NavigationMenuTrigger className="text-base font-normal">
-                    {item.text}
+                    {item.name}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="flex flex-col px-3 py-2 ">
-                    {item.subItems.map((subItem, key) => (
+                    {item?.children?.map((subItem, key) => (
                       <Link
                         key={key}
-                        href={subItem.url}
+                        href={`/category/${subItem._id}`}
                         className="py-1 px-6 rounded-sm hover:text-white hover:bg-primaryc"
                       >
-                        {subItem.text}
+                        {subItem.name}
                       </Link>
                     ))}
                   </NavigationMenuContent>
@@ -53,10 +62,10 @@ const NavBar = (props: Props) => {
               return (
                 <NavigationMenuItem key={key}>
                   <Link
-                    href={item.url}
+                    href={`/category/${item._id}`}
                     className="px-1 hover:text-secoundaryc"
                   >
-                    {item.text}
+                    {item.name}
                   </Link>
                 </NavigationMenuItem>
               );
