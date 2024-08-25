@@ -14,7 +14,8 @@ import ProductSizes from "./ProductSizes";
 import { Button } from "./ui/button";
 
 type Props = {
-  categories:Category[]
+  categories:Category[],
+  loading: boolean
 };
 
 type Category = {
@@ -23,10 +24,9 @@ type Category = {
   children:Category[]
 }
 
-const categories = ["All", "Men", "Women", "Girls", "Boys", "Babies"];
 const types = ["Jackets", "Pants", "Dress", "Blouse", "Skirt", "Jeans"];
 
-const ProductCategories = ({categories}:Props) => {
+const ProductCategories = ({categories, loading}:Props) => {
   
   return (
     <div className="pb-5">
@@ -34,12 +34,16 @@ const ProductCategories = ({categories}:Props) => {
         <AccordionItem value="product_category">
           <AccordionTrigger>Product Categories</AccordionTrigger>
           <AccordionContent>
-            {categories?.map((category:Category, idx:number) => (
-              <div className="py-1 flex gap-2 font-semibold" key={idx}>
-                <Checkbox className="w-5 h-5 data-[state=checked]:bg-secoundaryc border-gray-300" />
-                {category?.name}
-              </div>
-            ))}
+            {
+              loading 
+              ? 'loading..'
+              :categories?.map((category:Category, idx:number) => (
+                <div className="py-1 flex gap-2 font-semibold" key={idx}>
+                  <Checkbox className="w-5 h-5 data-[state=checked]:bg-secoundaryc border-gray-300" />
+                  {category?.name}
+                </div>
+              ))
+            }
           </AccordionContent>
         </AccordionItem>
       </Accordion>
