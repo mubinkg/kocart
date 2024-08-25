@@ -7,7 +7,16 @@ import {
 } from "@/components/ui/accordion";
 import { Checkbox } from "./ui/checkbox";
 
-type Props = {};
+type Props = {
+  attributeSet: {
+    _id: string,
+    attributeSetName: string,
+    attributeSetValues:[{
+      _id: string,
+      valueName: string
+    }]
+  }
+}
 
 const colors = [
   {
@@ -57,14 +66,14 @@ const SelectColor = (props: Props) => {
     <div className="">
       <Accordion type="single" defaultValue="colors" collapsible>
         <AccordionItem value="colors">
-          <AccordionTrigger>Filter by Color</AccordionTrigger>
+          <AccordionTrigger>{props?.attributeSet?.attributeSetName}</AccordionTrigger>
           <AccordionContent>
-            {colors.map((item, idx) => (
-              <div className="py-1 flex gap-2 font-semibold" key={idx}>
+            {props?.attributeSet?.attributeSetValues?.map((item) => (
+              <div className="py-1 flex gap-2 font-semibold" key={item._id}>
                 <Checkbox
                   className={`w-5 h-5 data-[state=checked]:bg-secoundaryc border rounded-sm border-gray-300`}
                 />
-                <label htmlFor={item.value}>{item.name}</label>
+                <label htmlFor={item._id}>{item?.valueName}</label>
               </div>
             ))}
           </AccordionContent>

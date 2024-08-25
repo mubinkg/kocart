@@ -15,7 +15,15 @@ import { Button } from "./ui/button";
 
 type Props = {
   categories:Category[],
-  loading: boolean
+  loading: boolean,
+  attributeSetValues:[{
+    _id: string,
+    attributeSetName: string,
+    attributeSetValues:[{
+      _id: string,
+      valueName: string
+    }]
+  }]
 };
 
 type Category = {
@@ -26,7 +34,7 @@ type Category = {
 
 const types = ["Jackets", "Pants", "Dress", "Blouse", "Skirt", "Jeans"];
 
-const ProductCategories = ({categories, loading}:Props) => {
+const ProductCategories = ({categories, loading, attributeSetValues}:Props) => {
   
   return (
     <div className="pb-5">
@@ -58,8 +66,9 @@ const ProductCategories = ({categories, loading}:Props) => {
       </div>
       <hr></hr>
       <FilterPrice />
-      <SelectColor />
-      <ProductSizes />
+      {
+        attributeSetValues?.map((attributeSet)=>(<SelectColor attributeSet={attributeSet} key={attributeSet._id}/>))
+      }
       <div className="flex items-center justify-center">
         <Button className="bg-secoundaryc my-3 rounded-full w-1/2">
           Reset all
