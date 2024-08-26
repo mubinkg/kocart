@@ -6,9 +6,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-type Props = {};
+type Props = {
+  minPrice?: number,
+  setMinPrice: any,
+  maxPrice?: number,
+  setMaxPrice:any
+};
 
-const FilterPrice = (props: Props) => {
+const FilterPrice = ({minPrice,setMinPrice, maxPrice, setMaxPrice}: Props) => {
   return (
     <div className="">
       <Accordion type="single" defaultValue="price" collapsible>
@@ -21,6 +26,8 @@ const FilterPrice = (props: Props) => {
                 type="number"
                 placeholder="Min"
                 className="border border-gray-300 rounded-lg p-2 w-full"
+                value={minPrice}
+                onChange={(e)=>setMinPrice(e.target.value)}
               />
             </div>
             <div>
@@ -29,6 +36,8 @@ const FilterPrice = (props: Props) => {
                 type="number"
                 placeholder="Max"
                 className="border border-gray-300 rounded-lg p-2 w-full"
+                value={maxPrice}
+                onChange={(e)=>setMaxPrice(e.target.value)}
               />
             </div>
           </AccordionContent>

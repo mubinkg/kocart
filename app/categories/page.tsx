@@ -9,10 +9,10 @@ import { useLazyQuery, useQuery } from "@apollo/client";
 import { GET_ATTRIBUTE_SET_VALUES, PRODUCT_CATEGORY } from "@/graphql/query/category";
 import { GET_PRODUCT_FOR_WEB } from "@/graphql/query/product";
 
-type Props = {};
-
-const page = (props: Props) => {
+const page = () => {
   const [filterCategories, setFilterCategries] = useState<string[]>([])
+  const [minPrice, setMinPrice] = useState<number>()
+  const [maxPrice, setMaxPrice] = useState<number>()
   const { data, loading } = useQuery(PRODUCT_CATEGORY, {
     variables: {
       "getCategoriesInput": {
@@ -33,6 +33,10 @@ const page = (props: Props) => {
     if(filterCategories.length){
       query["category_id"] = filterCategories
     }
+    if(minPrice && maxPrice){
+      query['min_price'] = parseFloat(minPrice.toString())
+      query['max_price'] = parseFloat(maxPrice.toString())
+    }
 
     getProducts({
       variables: {
@@ -41,7 +45,7 @@ const page = (props: Props) => {
       fetchPolicy: "no-cache"
     })
 
-  }, [, filterCategories])
+  }, [, filterCategories, minPrice, maxPrice])
 
   const mainCompoent = (
     <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 my-4 mx-12">
@@ -66,6 +70,10 @@ const page = (props: Props) => {
           attributeSetValues={attributeSetData?.getAttributeValuesByAttributeSet}
           filterCategories={filterCategories}
           setFilterCategries={setFilterCategries}
+          minPrice = {minPrice}
+          setMinPrice = {setMinPrice}
+          maxPrice = {maxPrice}
+          setMaxPrice = {setMaxPrice}
         />
       </div>
       <div className="border md:hidden flex justify-between items-center px-7 py-3 rounded-lg">

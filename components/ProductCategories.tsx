@@ -10,7 +10,6 @@ import {
 import { Checkbox } from "./ui/checkbox";
 import FilterPrice from "./FilterPrice";
 import SelectColor from "./SelectColor";
-import ProductSizes from "./ProductSizes";
 import { Button } from "./ui/button";
 
 type Props = {
@@ -25,7 +24,11 @@ type Props = {
     }]
   }],
   filterCategories:string[],
-  setFilterCategries: any
+  setFilterCategries: any,
+  minPrice?: number,
+  setMinPrice: any,
+  maxPrice?: number,
+  setMaxPrice:any
 };
 
 type Category = {
@@ -36,7 +39,7 @@ type Category = {
 
 const types = ["Jackets", "Pants", "Dress", "Blouse", "Skirt", "Jeans"];
 
-const ProductCategories = ({categories, loading, attributeSetValues, filterCategories, setFilterCategries}:Props) => {
+const ProductCategories = ({categories, loading, attributeSetValues, filterCategories, setFilterCategries, minPrice, setMinPrice, maxPrice, setMaxPrice}:Props) => {
   
   function setFilterCategoriesValue(e:any){
     const value = e.target.value
@@ -59,7 +62,7 @@ const ProductCategories = ({categories, loading, attributeSetValues, filterCateg
               ? 'loading..'
               :categories?.map((category:Category, idx:number) => (
                 <div className="py-1 flex gap-2 font-semibold" key={idx}>
-                  <Checkbox value={category._id} onClick={(e:any)=>setFilterCategoriesValue(e)} className="w-5 h-5 data-[state=checked]:bg-secoundaryc border-gray-300" />
+                  <Checkbox checked={filterCategories.find(val=>val === category._id) ? true : false} value={category._id} onClick={(e:any)=>setFilterCategoriesValue(e)} className="w-5 h-5 data-[state=checked]:bg-secoundaryc border-gray-300" />
                   {category?.name}
                 </div>
               ))
@@ -77,7 +80,12 @@ const ProductCategories = ({categories, loading, attributeSetValues, filterCateg
         ))}
       </div>
       <hr></hr>
-      <FilterPrice />
+      <FilterPrice
+        minPrice = {minPrice}
+        setMinPrice = {setMinPrice}
+        maxPrice = {maxPrice}
+        setMaxPrice = {setMaxPrice}
+      />
       {
         attributeSetValues?.map((attributeSet)=>(<SelectColor attributeSet={attributeSet} key={attributeSet._id}/>))
       }
