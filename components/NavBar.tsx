@@ -23,34 +23,44 @@ type Props = {};
 const NavBar = (props: Props) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const router = useRouter()
-  const {data, loading} = useQuery(PRODUCT_CATEGORY, {variables:{
-    "getCategoriesInput": {
-      "limit": 100,
-      "offset": 0
+  const { data, loading } = useQuery(PRODUCT_CATEGORY, {
+    variables: {
+      "getCategoriesInput": {
+        "limit": 100,
+        "offset": 0
+      }
     }
-  }})
+  })
 
 
   return (
     <header className="flex items-center justify-between px-5 lg:px-10 py-4 bg-white shadow-md">
-      <div onClick={()=>router.push('/')} className="w-14 sm:w-20 lg:w-24 hover:cursor-pointer">
+      <div onClick={() => router.push('/')} className="w-14 sm:w-20 lg:w-24 hover:cursor-pointer">
         <Image alt="KoCart Logo" src={logo} />
       </div>
       <NavigationMenu className="hidden lg:block pl-14">
-        <NavigationMenuList className="flex gap-1">
-          {data?.categories?.map((item:any, key:any) => {
+        <NavigationMenuList className="flex gap-4">
+          <NavigationMenuItem>
+            <Link
+              href={`/categories`}
+              className="px-1 hover:text-secoundaryc text-nowrap"
+            >
+              Category
+            </Link>
+          </NavigationMenuItem>
+          {data?.categories?.map((item: any, key: any) => {
             if (item?.children?.length > 0) {
               return (
                 <NavigationMenuItem key={key}>
-                  <NavigationMenuTrigger className="text-base font-normal">
+                  <NavigationMenuTrigger className="text-base font-normal text-nowrap">
                     {item.name}
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="flex flex-col px-3 py-2 ">
-                    {item?.children?.map((subItem:any, key:any) => (
+                  <NavigationMenuContent className="flex flex-col px-3 py-2 w-[100px]">
+                    {item?.children?.map((subItem: any, key: any) => (
                       <Link
                         key={key}
                         href={`/categories/${subItem._id}`}
-                        className="py-1 px-6 rounded-sm hover:text-white hover:bg-primaryc"
+                        className="py-1 px-6 rounded-sm hover:text-white hover:bg-primaryc text-nowrap"
                       >
                         {subItem.name}
                       </Link>
@@ -63,7 +73,7 @@ const NavBar = (props: Props) => {
                 <NavigationMenuItem key={key}>
                   <Link
                     href={`/categories/${item._id}`}
-                    className="px-1 hover:text-secoundaryc"
+                    className="text-nowrap"
                   >
                     {item.name}
                   </Link>
