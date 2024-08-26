@@ -41,3 +41,16 @@ export const PRODUCT_DETAILS = gql`query ProductForWeb($productId: String!) {
       pro_input_description
     }
   }`
+
+export const GET_PRODUCT_FOR_WEB = gql`query GetProductForWeb($getProductInput: GetProductDto!) {
+  getProductForWeb(getProductInput: $getProductInput) {
+    _id
+    pro_input_image
+    pro_input_name
+    productvariants {
+      _id
+      specialPrice
+      price
+    }
+  }
+}`
