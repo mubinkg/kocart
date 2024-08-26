@@ -23,7 +23,9 @@ type Props = {
       _id: string,
       valueName: string
     }]
-  }]
+  }],
+  filterCategories:string[],
+  setFilterCategries: any
 };
 
 type Category = {
@@ -34,8 +36,18 @@ type Category = {
 
 const types = ["Jackets", "Pants", "Dress", "Blouse", "Skirt", "Jeans"];
 
-const ProductCategories = ({categories, loading, attributeSetValues}:Props) => {
+const ProductCategories = ({categories, loading, attributeSetValues, filterCategories, setFilterCategries}:Props) => {
   
+  function setFilterCategoriesValue(e:any){
+    const value = e.target.value
+    const isExist = (filterCategories.find(val=>val === value))
+    if(isExist){
+      setFilterCategries([...filterCategories.filter(data=>value!==data)])
+    }else{
+      setFilterCategries([...filterCategories, value])
+    }
+  }
+
   return (
     <div className="pb-5">
       <Accordion type="single" defaultValue="product_category" collapsible>
@@ -47,7 +59,7 @@ const ProductCategories = ({categories, loading, attributeSetValues}:Props) => {
               ? 'loading..'
               :categories?.map((category:Category, idx:number) => (
                 <div className="py-1 flex gap-2 font-semibold" key={idx}>
-                  <Checkbox className="w-5 h-5 data-[state=checked]:bg-secoundaryc border-gray-300" />
+                  <Checkbox value={category._id} onClick={(e:any)=>setFilterCategoriesValue(e)} className="w-5 h-5 data-[state=checked]:bg-secoundaryc border-gray-300" />
                   {category?.name}
                 </div>
               ))
