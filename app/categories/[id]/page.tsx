@@ -13,7 +13,7 @@ export default function Page({ params }: any) {
             getProducts({
                 variables: {
                     "getProductInput": {
-                        "category_id": params.id,
+                        "category_id": [params.id],
                         "limit": 100,
                         "offset": 0
                     }
