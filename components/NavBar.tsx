@@ -38,7 +38,7 @@ const NavBar = (props: Props) => {
       </div>
       <NavigationMenu className="hidden lg:block pl-14">
         <NavigationMenuList className="flex gap-1">
-          {data?.categories?.map((item, key) => {
+          {data?.categories?.map((item:any, key:any) => {
             if (item?.children?.length > 0) {
               return (
                 <NavigationMenuItem key={key}>
@@ -46,10 +46,10 @@ const NavBar = (props: Props) => {
                     {item.name}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="flex flex-col px-3 py-2 ">
-                    {item?.children?.map((subItem, key) => (
+                    {item?.children?.map((subItem:any, key:any) => (
                       <Link
                         key={key}
-                        href={`/category/${subItem._id}`}
+                        href={`/categories/${subItem._id}`}
                         className="py-1 px-6 rounded-sm hover:text-white hover:bg-primaryc"
                       >
                         {subItem.name}
@@ -62,7 +62,7 @@ const NavBar = (props: Props) => {
               return (
                 <NavigationMenuItem key={key}>
                   <Link
-                    href={`/category/${item._id}`}
+                    href={`/categories/${item._id}`}
                     className="px-1 hover:text-secoundaryc"
                   >
                     {item.name}
