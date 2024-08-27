@@ -28,7 +28,8 @@ type Props = {
   minPrice?: number,
   setMinPrice: any,
   maxPrice?: number,
-  setMaxPrice:any
+  setMaxPrice:any,
+  resetAll: any
 };
 
 type Category = {
@@ -39,7 +40,7 @@ type Category = {
 
 const types = ["Jackets", "Pants", "Dress", "Blouse", "Skirt", "Jeans"];
 
-const ProductCategories = ({categories, loading, attributeSetValues, filterCategories, setFilterCategries, minPrice, setMinPrice, maxPrice, setMaxPrice}:Props) => {
+const ProductCategories = ({categories, loading, attributeSetValues, filterCategories, setFilterCategries, minPrice, setMinPrice, maxPrice, setMaxPrice, resetAll}:Props) => {
   
   function setFilterCategoriesValue(e:any){
     const value = e.target.value
@@ -90,7 +91,7 @@ const ProductCategories = ({categories, loading, attributeSetValues, filterCateg
         attributeSetValues?.map((attributeSet)=>(<SelectColor attributeSet={attributeSet} key={attributeSet._id}/>))
       }
       <div className="flex items-center justify-center">
-        <Button className="bg-secoundaryc my-3 rounded-full w-1/2">
+        <Button className="bg-secoundaryc my-3 rounded-full w-1/2" onClick={resetAll}>
           Reset all
         </Button>
       </div>

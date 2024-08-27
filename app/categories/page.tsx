@@ -11,8 +11,8 @@ import { GET_PRODUCT_FOR_WEB } from "@/graphql/query/product";
 
 const page = () => {
   const [filterCategories, setFilterCategries] = useState<string[]>([])
-  const [minPrice, setMinPrice] = useState<number>()
-  const [maxPrice, setMaxPrice] = useState<number>()
+  const [minPrice, setMinPrice] = useState<number>(1)
+  const [maxPrice, setMaxPrice] = useState<number>(100000)
   const { data, loading } = useQuery(PRODUCT_CATEGORY, {
     variables: {
       "getCategoriesInput": {
@@ -47,6 +47,12 @@ const page = () => {
 
   }, [, filterCategories, minPrice, maxPrice])
 
+  function resetAll(){
+    setFilterCategries([])
+    setMinPrice(1)
+    setMaxPrice(100000)
+  }
+
   const mainCompoent = (
     <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 my-4 mx-12">
       {
@@ -74,6 +80,7 @@ const page = () => {
           setMinPrice = {setMinPrice}
           maxPrice = {maxPrice}
           setMaxPrice = {setMaxPrice}
+          resetAll={resetAll}
         />
       </div>
       <div className="border md:hidden flex justify-between items-center px-7 py-3 rounded-lg">
