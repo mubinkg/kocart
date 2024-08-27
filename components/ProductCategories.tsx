@@ -24,7 +24,9 @@ type Props = {
     }]
   }],
   filterCategories:string[],
+  filterSubCategories:string[],
   setFilterCategries: any,
+  setFilterSubCategories:any,
   minPrice?: number,
   setMinPrice: any,
   maxPrice?: number,
@@ -41,6 +43,8 @@ type Category = {
 const types = ["Jackets", "Pants", "Dress", "Blouse", "Skirt", "Jeans"];
 
 const ProductCategories = ({categories, loading, attributeSetValues, filterCategories, setFilterCategries, minPrice, setMinPrice, maxPrice, setMaxPrice, resetAll}:Props) => {
+
+  console.log(categories?.map(d=>d.children).flat())
   
   function setFilterCategoriesValue(e:any){
     const value = e.target.value
@@ -73,10 +77,10 @@ const ProductCategories = ({categories, loading, attributeSetValues, filterCateg
       </Accordion>
       <hr></hr>
       <div className="py-5">
-        {types.map((item, idx) => (
-          <div key={idx} className="py-1 flex gap-2 font-semibold">
+        {categories?.map(d=>d.children).flat()?.map((item:Category) => (
+          <div key={item._id} className="py-1 flex gap-2 font-semibold">
             <Checkbox className="w-5 h-5 data-[state=checked]:bg-secoundaryc border-gray-300" />
-            {item}
+            {item?.name}
           </div>
         ))}
       </div>

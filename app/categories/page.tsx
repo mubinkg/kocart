@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import ProductCategories from "@/components/ProductCategories";
-import { categoryProduct } from "@/constants/products";
 import ProductCard from "@/components/ProductCard";
 import Filters from "@/components/Filters";
 import { useLazyQuery, useQuery } from "@apollo/client";
@@ -13,6 +12,7 @@ const page = () => {
   const [filterCategories, setFilterCategries] = useState<string[]>([])
   const [minPrice, setMinPrice] = useState<number>(1)
   const [maxPrice, setMaxPrice] = useState<number>(100000)
+  const [filterSubCategories, setFilterSubCategories] = useState([])
   const { data, loading } = useQuery(PRODUCT_CATEGORY, {
     variables: {
       "getCategoriesInput": {
@@ -76,6 +76,8 @@ const page = () => {
           attributeSetValues={attributeSetData?.getAttributeValuesByAttributeSet}
           filterCategories={filterCategories}
           setFilterCategries={setFilterCategries}
+          filterSubCategories={filterSubCategories}
+          setFilterSubCategories = {setFilterSubCategories}
           minPrice = {minPrice}
           setMinPrice = {setMinPrice}
           maxPrice = {maxPrice}
