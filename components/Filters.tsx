@@ -19,7 +19,7 @@ const Filters = (props: Props) => {
           <Filter />
         </Button>
       </div>
-      {toggle && (
+      {/* {toggle && (
         <div className="fixed h-screen w-2/3 bg-white right-0 top-0 z-20 px-14 py-10 overflow-y-scroll">
           <div className="w-full flex justify-between">
             <p className="text-2xl font-semibold">Filter products</p>
@@ -29,7 +29,7 @@ const Filters = (props: Props) => {
             <ProductCategories />
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };
