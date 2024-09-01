@@ -85,9 +85,9 @@ const page = () => {
           resetAll={resetAll}
         />
       </div>
-      <div className="border md:hidden flex justify-between items-center px-7 py-3 rounded-lg">
+      {/* <div className="border md:hidden flex justify-between items-center px-7 py-3 rounded-lg">
         <Filters />
-      </div>
+      </div> */}
       <div className="w-full md:w-3/4">
         {
           productLoading ? 'Loading...': mainCompoent
