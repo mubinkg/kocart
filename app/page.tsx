@@ -28,7 +28,7 @@ export default function Component() {
 
         <div className="flex items-center justify-between py-10 px-1">
           <h2 className="text-xl md:text-3xl font-semibold pl-3">
-            Explore our Products
+            Explore our Product List
           </h2>
           <Button className="bg-secoundaryc hover:bg-primaryc px-5 md:px-10 rounded-full">
             View all
