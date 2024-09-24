@@ -1,0 +1,34 @@
+name: Deploy to GCP
+
+on:
+  push:
+    branches:
+      - master  # or your desired branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Deploy to GCP VM via SSH
+      uses: appleboy/ssh-action@v0.1.3
+      with:
+        host: ${{ secrets.GCP_VM_IP }}        # Set this in your repo secrets
+        username: ${{ secrets.GCP_VM_USER }}  # Set this in your repo secrets
+        key: ${{ secrets.GCP_VM_SSH_KEY }}    # Set this in your repo secrets
+        port: 22
+
+        script: |
+          cd /kocart-admin
+          git pull origin main
+          npm install
+          npm run build
+          pm2 restart all
+
+    - name: Clean up old artifacts
+      uses: actions/delete-artifact@v1
+      with:
+        name: nextjs-build
