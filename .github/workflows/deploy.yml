@@ -15,9 +15,9 @@ jobs:
     - name: Deploy to GCP VM via SSH
       uses: appleboy/ssh-action@v0.1.3
       with:
-        host: ${{ secrets.GCP_VM_IP }}        # Set this in your repo secrets
-        username: ${{ secrets.GCP_VM_USER }}  # Set this in your repo secrets
-        key: ${{ secrets.GCP_VM_SSH_KEY }}    # Set this in your repo secrets
+        host: ${{ secrets.GCP_VM_IP }}
+        username: ${{ secrets.GCP_VM_USER }}
+        key: ${{ secrets.GCP_VM_SSH_KEY }}
         port: 22
 
         script: |
