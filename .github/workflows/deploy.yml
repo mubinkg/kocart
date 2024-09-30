@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Get ssh key
-      run: echo "${{ secrets.GCP_VM_SSH_KEY }}"
     - name: Get vm ip
       run: echo "${{ secrets.GCP_VM_IP }}"
     - name: Get vm user
